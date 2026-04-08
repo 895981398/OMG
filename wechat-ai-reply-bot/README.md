@@ -10,11 +10,11 @@
 - 🎭 **人格切换**：支持多种聊天人格
 - 🔒 **并发控制**：工业级并发架构，防重复、防卡死
 - ✨ **真人化处理**：去除 AI 感
-- 🔐 **微信数据库解密**：内置解密工具（来源见下方）
+- 🔐 **微信数据库解密**：内置解密工具
 
 ## 解密工具来源
 
-本项目中的 `tools/` 目录下的微信解密工具来源于：
+本项目中的 `tools/` 目录下的微信解密工具来源于本人开源项目：
 
 **https://github.com/895981398/OMG**
 
@@ -42,10 +42,8 @@ pip install -r requirements.txt
 export DOUBO_KEY='your-doubao-api-key'
 export MINIMAX_KEY='your-minimax-api-key'
 
-# 微信路径配置
+# 微信路径配置（根据实际修改）
 export WAL_BASE='/Users/xxx/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/xxxx/Message'
-export DECRYPTED_DIR='./decrypted'
-export KEYS_FILE='./all_keys.json'
 ```
 
 ### 4. 提取微信密钥（需要微信在运行 + sudo）
@@ -67,7 +65,6 @@ cd ..
 ```bash
 cd tools
 python3 decrypt_db.py
-# 解密后的数据会输出到 DECRYPTED_DIR 目录
 cd ..
 ```
 
@@ -84,16 +81,29 @@ wechat-ai-reply-bot/
 ├── tools/                    # 微信解密工具
 │   ├── config.py            # 解密工具配置
 │   ├── crypto_params.py     # 加解密参数
-│   ├── decrypt_db.py       # 数据库解密
+│   ├── decrypt_db.py        # 数据库解密
 │   └── find_all_keys.py    # 密钥提取
 │
 ├── core.py                   # 核心逻辑
 ├── main.py                  # 入口
 ├── config.py               # 机器人配置
 ├── personalities.json       # 人格配置
+├── all_keys.json           # ⚠️ 你的微信密钥（不同用户不同，不上传）
+├── config.json             # ⚠️ 你的配置（不上传）
+├── decrypted/              # ⚠️ 解密后数据（不上传）
 ├── requirements.txt
 └── README.md
 ```
+
+## ⚠️ 重要：私密文件
+
+以下文件包含用户敏感信息，**不要上传或分享**：
+
+- `all_keys.json` — 你的微信密钥
+- `config.json` — 你的微信配置
+- `decrypted/` — 解密后的数据库
+
+这些文件已在 `.gitignore` 中排除。
 
 ## 配置说明
 
@@ -116,25 +126,10 @@ wechat-ai-reply-bot/
 | presence_penalty | 0.1 | - |
 | max_tokens | 64 | 强制短回复 |
 
-### 解密工具配置（tools/config.py）
-
-| 环境变量 | 说明 |
-|----------|------|
-| `WAL_BASE` | 微信 WAL 路径 |
-| `DECRYPTED_DIR` | 解密后输出目录 |
-| `KEYS_FILE` | 密钥文件路径 |
-
 ## 命令
 
 - `!人格` - 查看当前人格
 - `!人格 <名字>` - 切换人格
-
-## 注意事项
-
-- `personalities.json` 包含人格配置，可根据需要修改
-- `all_keys.json` 是你的微信密钥，**不要上传或分享**
-- 解密需要关闭 SIP 和 sudo 权限
-- API Key 通过环境变量设置，不写入代码
 
 ## 架构
 

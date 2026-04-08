@@ -1,23 +1,22 @@
 # Python
 __pycache__/
-*.py[cod]
+*.pyc
 *.so
 
 # Environment
 .env
 .env.local
 
-# Data files
-*.json
-!package.json
+# Data files (sensitive - user specific)
+all_keys.json
+config.json
+decrypted/
+
+# Logs
+*.log
 
 # macOS
 .DS_Store
 
-# WeChat specific (contain sensitive data)
-personalities.json
+# Current persona (user specific)
 .current_persona
-*.db
-
-# Logs
-*.log
