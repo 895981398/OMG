@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Environment
+.env
+.env.local
+
+# Data files
+*.json
+!package.json
+
+# macOS
+.DS_Store
+
+# WeChat specific (contain sensitive data)
+personalities.json
+.current_persona
+*.db
+
+# Logs
+*.log
